@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">RecomiendaME</string>
+    <string name="home">Principal</string>
+    <string name="restaurants">Restaurantes</string>
+    <string name="surprise">Sorpresa</string>
+    <string name="email">Correo Electronico</string>
+    <string name="password">Contraseña</string>
+    <string name="button_text">Iniciar Sesion</string>
+    <string name="sign_up"><u>Regístrate</u></string>
+    <string name="name">Nombre</string>
+    <string name="phone">Teléfono</string>
+    <string name="rep_password">Repetir Contraseña</string>
+    <string name="register">Registrar</string>
+</resources>

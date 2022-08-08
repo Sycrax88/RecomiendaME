@@ -6,27 +6,63 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
+import androidx.navigation.fragment.findNavController
 import com.colosoft.recomiendame.R
+import com.colosoft.recomiendame.databinding.FragmentSignUpBinding
 
 class SignUpFragment : Fragment() {
 
-    companion object {
-        fun newInstance() = SignUpFragment()
-    }
-
-    private lateinit var viewModel: SignUpViewModel
+    private lateinit var signUpBinding: FragmentSignUpBinding
+    private lateinit var signUpviewModel: SignUpViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.fragment_sign_up, container, false)
+    ): View {
+        signUpBinding = FragmentSignUpBinding.inflate(inflater, container, false)
+        signUpviewModel = ViewModelProvider(this)[SignUpViewModel::class.java]
+
+        signUpviewModel.errorMsg.observe(viewLifecycleOwner){ msg ->
+            showErrorMessage(msg)
+        }
+
+        signUpviewModel.registerSuccess.observe(viewLifecycleOwner){
+            goToLogin()
+        }
+
+        with(signUpBinding) {
+            signUpButton.setOnClickListener {
+                signUpviewModel.validateFields(
+                    nameEditText.text.toString(),
+                    lastNameEditText.text.toString(),
+                    phoneEditText.text.toString(),
+                    emailEditText.text.toString(),
+                    passwordEditText.text.toString(),
+                    repeatPasswordEditText.text.toString()
+                )
+
+            }
+        }
+
+        return signUpBinding.root
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProvider(this).get(SignUpViewModel::class.java)
-        // TODO: Use the ViewModel
+    private fun showErrorMessage(msg: String?) {
+        Toast.makeText(requireActivity(), msg, Toast.LENGTH_LONG).show()
     }
+
+
+    fun goToLogin() {
+        findNavController().navigate(SignUpFragmentDirections.actionNavigationSignupToNavigationLogin())
+
+    }
+
+    override fun onResume() {
+        super.onResume()
+        (activity as AppCompatActivity).supportActionBar!!.hide()
+    }
+
 
 }

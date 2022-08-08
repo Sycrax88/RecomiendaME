@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "226498055490",
+    "project_id": "recomiendame-10b71",
+    "storage_bucket": "recomiendame-10b71.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:226498055490:android:dc1cfc12f90e228d14ccdb",
+        "android_client_info": {
+          "package_name": "com.colosoft.recomiendame"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "226498055490-fdbdekofcev0gcrddcgdk6fj58s3ml6r.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB01B-z5ZBH6iu4BI5sLtm7CdAIiGRIGFM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "226498055490-fdbdekofcev0gcrddcgdk6fj58s3ml6r.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

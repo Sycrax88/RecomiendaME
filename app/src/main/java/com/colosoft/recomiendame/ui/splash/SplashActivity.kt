@@ -15,7 +15,7 @@ class SplashActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        //hiding the title bar
+        //Esconder el Toolbar
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         supportActionBar?.hide();
 

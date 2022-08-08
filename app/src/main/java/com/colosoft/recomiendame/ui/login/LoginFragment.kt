@@ -6,27 +6,55 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.colosoft.recomiendame.R
+import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
+import androidx.navigation.fragment.findNavController
+import com.colosoft.recomiendame.databinding.FragmentLoginBinding
 
 class LoginFragment : Fragment() {
 
-    companion object {
-        fun newInstance() = LoginFragment()
-    }
-
-    private lateinit var viewModel: LoginViewModel
+    private lateinit var loginBinding: FragmentLoginBinding
+    private lateinit var loginviewModel: LoginViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.fragment_login, container, false)
+    ): View {
+        loginBinding = FragmentLoginBinding.inflate(inflater, container, false)
+        loginviewModel = ViewModelProvider(this)[LoginViewModel::class.java]
+
+        loginviewModel.errorMsg.observe(viewLifecycleOwner){ msg ->
+            showErrorMessage(msg)
+        }
+        loginviewModel.loginSuccess.observe(viewLifecycleOwner){
+            goToList()
+        }
+
+        with(loginBinding){
+            loginButton.setOnClickListener {
+                loginviewModel.validateFields(emailEditText.text.toString(),passwordEditText.text.toString())
+            }
+
+            signUpTextView.setOnClickListener {
+                findNavController().navigate(LoginFragmentDirections.actionNavigationLoginToNavigationSignup())
+            }
+
+        }
+        return loginBinding.root
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProvider(this)[LoginViewModel::class.java]
-        // TODO: Use the ViewModel
+    private fun showErrorMessage(msg: String?) {
+        Toast.makeText(requireActivity(), msg, Toast.LENGTH_LONG).show()
+    }
+
+    fun goToList(){
+        findNavController().navigate(LoginFragmentDirections.actionNavigationLoginToNavigationHome())
+
+    }
+
+    override fun onResume() {
+        super.onResume()
+        (activity as AppCompatActivity).supportActionBar!!.hide()
     }
 
 }

@@ -47,7 +47,7 @@ class LoginFragment : Fragment() {
         Toast.makeText(requireActivity(), msg, Toast.LENGTH_LONG).show()
     }
 
-    fun goToList(){
+    private fun goToList(){
         findNavController().navigate(LoginFragmentDirections.actionNavigationLoginToNavigationHome())
 
     }

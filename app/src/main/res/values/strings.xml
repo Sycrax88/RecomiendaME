@@ -1,5 +1,6 @@
 <resources>
     <string name="app_name">RecomiendaME</string>
+    <string name="splash">Splash</string>
     <string name="home">Principal</string>
     <string name="restaurants">Restaurantes</string>
     <string name="surprise">Sorpresa</string>
@@ -12,4 +13,6 @@
     <string name="rep_password">Repetir Contraseña</string>
     <string name="register">Registrar</string>
     <string name="lastName">Apellido</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

@@ -3,7 +3,17 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@id/navigation_login">
+    app:startDestination="@id/navigation_splash">
+
+    <fragment
+        android:id="@+id/navigation_splash"
+        android:name="com.colosoft.recomiendame.ui.splash.SplashFragment"
+        android:label="@string/splash"
+        tools:layout="@layout/fragment_splash" >
+        <action
+            android:id="@+id/action_navigation_splash_to_navigation_login"
+            app:destination="@id/navigation_login" />
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_home"

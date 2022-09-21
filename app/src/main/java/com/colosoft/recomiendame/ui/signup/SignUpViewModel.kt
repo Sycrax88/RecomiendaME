@@ -3,8 +3,10 @@ package com.colosoft.recomiendame.ui.signup
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.colosoft.recomiendame.data.ResourceRemote
 import com.colosoft.recomiendame.data.UserRepository
+import com.colosoft.recomiendame.model.User
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -13,13 +15,22 @@ class SignUpViewModel : ViewModel() {
 
     private val userRepository = UserRepository()
 
+    private lateinit var user: User
+
     private val _errorMsg: MutableLiveData<String?> = MutableLiveData()
     val errorMsg: LiveData<String?> = _errorMsg
 
     private val _registerSuccess: MutableLiveData<String?> = MutableLiveData()
     val registerSuccess: LiveData<String?> = _registerSuccess
 
-    fun validateFields(name: String, lastName: String,phone: String, email: String, password: String, repPassword: String) {
+    fun validateFields(
+        name: String,
+        lastName: String,
+        phone: String,
+        email: String,
+        password: String,
+        repPassword: String
+    ) {
         if (name.isEmpty() || lastName.isEmpty() || phone.isEmpty() || email.isEmpty() || password.isEmpty() || repPassword.isEmpty())
             _errorMsg.value = "Debe digitar todos los campos."
         else
@@ -32,17 +43,22 @@ class SignUpViewModel : ViewModel() {
                     GlobalScope.launch(Dispatchers.IO) {
                         val result = userRepository.registerUser(email, password)
                         result.let { resourceRemote ->
-                            when (resourceRemote){
+                            when (resourceRemote) {
                                 is ResourceRemote.Success -> {
+                                    user = User(result.data, name, lastName, phone, email)
+                                    createUser(user)
                                     _registerSuccess.postValue(result.data)
                                     _errorMsg.postValue("Registro Exitoso.")
                                 }
                                 is ResourceRemote.Error -> {
                                     var msg = result.message
                                     when (result.message) {
-                                        "The email address is already in use by another account." -> msg = "Ya existe una cuenta con ese correo electrónico."
-                                        "The email address is badly formatted." -> msg = "El correo electrónico está mal escrito."
-                                        "A network error (suck as timeout, interrupted connection or unreachable host) has occurred." -> msg = "Revise su conexión de Internet."
+                                        "The email address is already in use by another account." -> msg =
+                                            "Ya existe una cuenta con ese correo electrónico."
+                                        "The email address is badly formatted." -> msg =
+                                            "El correo electrónico está mal escrito."
+                                        "A network error (suck as timeout, interrupted connection or unreachable host) has occurred." -> msg =
+                                            "Revise su conexión de Internet."
                                     }
                                     _errorMsg.postValue(msg)
                                 }
@@ -54,5 +70,28 @@ class SignUpViewModel : ViewModel() {
                     }
 
 
+    }
+
+    private fun createUser(user: User) {
+        viewModelScope.launch(Dispatchers.IO) {
+            val result = userRepository.createUser(user)
+            result.let { resourceRemote ->
+                sequenceOf(
+                    when (resourceRemote) {
+                        is ResourceRemote.Success -> {
+                            _registerSuccess.postValue(result.data)
+                            _errorMsg.postValue("Registro Exitoso")
+                        }
+                        is ResourceRemote.Error -> {
+                            val msg = result.message
+                            _errorMsg.postValue(msg)
+                        }
+                        else -> {
+                            //don't use
+                        }
+                    }
+                )
+            }
+        }
     }
 }

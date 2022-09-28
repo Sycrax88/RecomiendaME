@@ -1,7 +1,7 @@
 package com.colosoft.recomiendame.data
 
 import android.util.Log
-import com.colosoft.recomiendame.model.User
+import com.colosoft.recomiendame.server.model.User
 import com.google.firebase.FirebaseNetworkException
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseAuthException

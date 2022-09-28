@@ -2,6 +2,7 @@
     <string name="app_name">RecomiendaME</string>
     <string name="home">Principal</string>
     <string name="restaurants">Restaurantes</string>
+    <string name="details">Detalles</string>
     <string name="surprise">Sorpresa</string>
     <string name="email">Correo Electronico</string>
     <string name="password">Contraseña</string>
@@ -13,6 +14,7 @@
     <string name="register">Registrar</string>
     <string name="lastName">Apellido</string>
 
+
     <string name="explanation_home">En este fragment será la página principal, aqui se mostrarán
     elementos como noticias, promociones de restaurantes o los restaurantes más valorados por semana
     , será un espacio para que haya información general de restaurantes.</string>
@@ -23,4 +25,8 @@
     <string name="explanation_surprise">En este fragment se mostrarán recomendaciones de restaurantes
         diarios, tomandose al azar pero tomando en cuenta un promedio de valoracion decente para
         ser mostrado a los usuarios. Pueden mostrarse de 1 a 3 restaurantes diarios.</string>
+    <string name="restaurant_title">Nombre del Restaurante</string>
+    <string name="location_label">"Ubicación: "</string>
+    <string name="location_example">Laureles</string>
+    <string name="rating_label">4.8</string>
 </resources>

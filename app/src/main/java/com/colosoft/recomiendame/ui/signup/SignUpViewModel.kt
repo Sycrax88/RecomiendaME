@@ -6,7 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.colosoft.recomiendame.data.ResourceRemote
 import com.colosoft.recomiendame.data.UserRepository
-import com.colosoft.recomiendame.model.User
+import com.colosoft.recomiendame.server.model.User
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch

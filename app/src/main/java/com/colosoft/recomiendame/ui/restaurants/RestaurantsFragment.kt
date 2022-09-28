@@ -4,39 +4,58 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.colosoft.recomiendame.databinding.FragmentRestaurantsBinding
+import com.colosoft.recomiendame.server.model.Restaurant
 
 class RestaurantsFragment : Fragment() {
 
-    private var _binding: FragmentRestaurantsBinding? = null
-
-    // This property is only valid between onCreateView and
-    // onDestroyView.
-    private val binding get() = _binding!!
+    private lateinit var restaurantBinding: FragmentRestaurantsBinding
+    private lateinit var restaurantsViewModel: RestaurantsViewModel
+    private var restaurantsList: ArrayList<Restaurant> = ArrayList()
+    private lateinit var restaurantsAdapter: RestaurantsAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val restaurantsViewModel =
-            ViewModelProvider(this)[RestaurantsViewModel::class.java]
+        restaurantsViewModel = ViewModelProvider(this)[RestaurantsViewModel::class.java]
+        restaurantBinding = FragmentRestaurantsBinding.inflate(inflater,container,false)
+        val root: View = restaurantBinding.root
 
-        _binding = FragmentRestaurantsBinding.inflate(inflater, container, false)
-        val root: View = binding.root
-
-        val textView: TextView = binding.textDashboard
-        restaurantsViewModel.text.observe(viewLifecycleOwner) {
-            textView.text = it
-        }
         return root
     }
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        println("Hola mundo.")
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
+        super.onViewCreated(view, savedInstanceState)
+
+        restaurantsAdapter = RestaurantsAdapter(restaurantsList, onItemClicked = {onRestaurantItemClicked(it)})
+
+        restaurantBinding.restaurantRecyclerView.apply {
+            layoutManager = LinearLayoutManager(this@RestaurantsFragment.requireContext())
+            adapter = restaurantsAdapter
+            setHasFixedSize(false)
+        }
+
+        restaurantsViewModel.restaurantsLoaded.observe(viewLifecycleOwner){ result ->
+            println("En el fragment: "+ result.size)
+            onRestaurantsLoadedSubscribe(result)
+        }
+
+        restaurantsViewModel.getRestaurants()
+    }
+
+   private fun onRestaurantItemClicked(restaurant: Restaurant) {
+        findNavController().navigate(RestaurantsFragmentDirections.actionNavigationRestaurantsToNavigationDetails())
+    }
+    private fun onRestaurantsLoadedSubscribe(restaurantsList: ArrayList<Restaurant>?) {
+        restaurantsList?.let { restaurantsList ->
+            restaurantsAdapter.appendItems(restaurantsList)
+        }
     }
 }

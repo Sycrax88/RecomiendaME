@@ -15,7 +15,17 @@
         android:id="@+id/navigation_restaurants"
         android:name="com.colosoft.recomiendame.ui.restaurants.RestaurantsFragment"
         android:label="@string/restaurants"
-        tools:layout="@layout/fragment_restaurants" />
+        tools:layout="@layout/fragment_restaurants" >
+        <action
+            android:id="@+id/action_navigation_restaurants_to_navigation_details"
+            app:destination="@id/navigation_details" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/navigation_details"
+        android:name="com.colosoft.recomiendame.ui.details.DetailsFragment"
+        android:label="@string/details"
+        tools:layout="@layout/fragment_details" />
 
     <fragment
         android:id="@+id/navigation_surprise"

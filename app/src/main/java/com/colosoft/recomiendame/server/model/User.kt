@@ -1,4 +1,4 @@
-package com.colosoft.recomiendame.model
+package com.colosoft.recomiendame.server.model
 
 data class User(
     var uid: String?,

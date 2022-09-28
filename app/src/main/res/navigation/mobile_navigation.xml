@@ -25,7 +25,11 @@
         android:id="@+id/navigation_details"
         android:name="com.colosoft.recomiendame.ui.details.DetailsFragment"
         android:label="@string/details"
-        tools:layout="@layout/fragment_details" />
+        tools:layout="@layout/fragment_details" >
+    <argument
+        android:name="restaurant"
+        app:argType="com.colosoft.recomiendame.server.model.Restaurant" />
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_surprise"

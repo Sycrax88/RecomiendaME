@@ -51,7 +51,7 @@ class RestaurantsFragment : Fragment() {
     }
 
    private fun onRestaurantItemClicked(restaurant: Restaurant) {
-        findNavController().navigate(RestaurantsFragmentDirections.actionNavigationRestaurantsToNavigationDetails())
+        findNavController().navigate(RestaurantsFragmentDirections.actionNavigationRestaurantsToNavigationDetails(restaurant))
     }
     private fun onRestaurantsLoadedSubscribe(restaurantsList: ArrayList<Restaurant>?) {
         restaurantsList?.let { restaurantsList ->

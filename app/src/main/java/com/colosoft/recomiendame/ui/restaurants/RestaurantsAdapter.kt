@@ -40,7 +40,7 @@ class RestaurantsAdapter (
 
         fun bindRestaurant(restaurant: Restaurant){
             with(binding){
-                restaurantTitleTextView.text = restaurant.name
+                restaurantNameTextView.text = restaurant.name
                 locationTextView.text = restaurant.restaurantLocation
                 ratingLabelTextView.text = restaurant.rating.toString()
                 if (restaurant.urlPhoto != null)

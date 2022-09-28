@@ -14,7 +14,6 @@
     <string name="register">Registrar</string>
     <string name="lastName">Apellido</string>
 
-
     <string name="explanation_home">En este fragment será la página principal, aqui se mostrarán
     elementos como noticias, promociones de restaurantes o los restaurantes más valorados por semana
     , será un espacio para que haya información general de restaurantes.</string>
@@ -29,4 +28,7 @@
     <string name="location_label">"Ubicación: "</string>
     <string name="location_example">Laureles</string>
     <string name="rating_label">4.8</string>
+    <string name="menu_label">Menú</string>
+    <string name="opinions">Opiniones</string>
+    <string name="create_opinion">Comenta tu experiencia</string>
 </resources>

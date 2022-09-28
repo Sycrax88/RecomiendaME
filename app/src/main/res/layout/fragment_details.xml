@@ -103,6 +103,8 @@
         android:layout_height="54dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
+        android:clickable="true"
+        android:contentDescription="@string/menu_label"
         android:src="@drawable/ic_menu_book"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/restaurant_name_text_view"
@@ -110,13 +112,16 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/opinions_recycler_view"
-        android:layout_width="409dp"
+        android:layout_width="0dp"
         android:layout_height="0dp"
+        android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
         app:layout_constraintBottom_toTopOf="@+id/create_opinion_button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/developer_label_text_view2"
-        tools:layout_editor_absoluteX="1dp"
         tools:listitem="@layout/opinion_item" />
 
     <Button

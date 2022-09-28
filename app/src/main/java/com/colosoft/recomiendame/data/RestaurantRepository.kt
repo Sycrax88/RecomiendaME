@@ -18,7 +18,6 @@ class RestaurantRepository {
     //private var auth: FirebaseAuth = Firebase.auth
 
      suspend fun getRestaurants(): QuerySnapshot {
-        val restaurantsList = ArrayList<Restaurant>()
         db = FirebaseFirestore.getInstance()
         return db.collection("restaurant").get().await()
           /*  .addOnSuccessListener {

@@ -55,7 +55,11 @@
         android:id="@+id/navigation_surprise"
         android:name="com.colosoft.recomiendame.ui.surprise.SurpriseFragment"
         android:label="@string/surprise"
-        tools:layout="@layout/fragment_surprise" />
+        tools:layout="@layout/fragment_surprise" >
+        <action
+            android:id="@+id/action_navigation_surprise_to_navigation_details"
+            app:destination="@id/navigation_details" />
+    </fragment>
     <fragment
         android:id="@+id/navigation_login"
         android:name="com.colosoft.recomiendame.ui.login.LoginFragment"

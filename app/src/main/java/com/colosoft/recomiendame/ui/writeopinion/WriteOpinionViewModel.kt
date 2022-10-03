@@ -57,7 +57,7 @@ class WriteOpinionViewModel : ViewModel() {
         }
     }
 
-    fun updateRestaurantRating(restaurant: Restaurant){
+    fun updateRestaurantRating(restaurant: Restaurant, rateByUser: Double){
         val restaurantId = restaurant.id.toString()
         val opinionsList: ArrayList<Opinion> = ArrayList()
 
@@ -70,20 +70,21 @@ class WriteOpinionViewModel : ViewModel() {
                 }
 
             }
-            val totalOpinions= opinionsList.size
+            val totalOpinions= opinionsList.size + 1
             println("Cantidad de opiniones: $totalOpinions")
 
                 var ratingSummatory = 0.0
                 for (item in opinionsList){
                     ratingSummatory += item.rating!!
                 }
+            ratingSummatory += rateByUser
             println("Sumatoria de opiniones: $ratingSummatory")
                 val ratingMean = ratingSummatory/totalOpinions
                 println("Nuevo promedio: $ratingMean")
 
                 val ratingMeanMap = hashMapOf(
                     "rating" to ratingMean,
-                    "numRating" to totalOpinions+1
+                    "numRating" to totalOpinions
                 )
                 db.collection("restaurant")
                     .document(restaurantId).update(ratingMeanMap as Map<String, Any>)

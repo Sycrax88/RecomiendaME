@@ -93,7 +93,7 @@ class WriteOpinionFragment : Fragment() {
                     if (opinionInputEditText.text.toString().isNotEmpty()){
                         if(opinionInputEditText.length()>= 6){
                             writeOpinionViewModel.createOpinion(restaurant,restaurantRateByUser,opinionInputEditText.text.toString())
-                            writeOpinionViewModel.updateRestaurantRating(restaurant)
+                            writeOpinionViewModel.updateRestaurantRating(restaurant,restaurantRateByUser)
                             Toast.makeText(getActivity(),R.string.successOpinion,Toast.LENGTH_SHORT).show();
                             findNavController().navigate(WriteOpinionFragmentDirections.actionNavigationWriteOpinionToNavigationRestaurants())
                         }

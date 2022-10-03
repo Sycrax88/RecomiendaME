@@ -7,36 +7,60 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.colosoft.recomiendame.databinding.FragmentRestaurantsBinding
 import com.colosoft.recomiendame.databinding.FragmentSurpriseBinding
+import com.colosoft.recomiendame.server.model.Restaurant
+import com.colosoft.recomiendame.ui.restaurants.RestaurantsAdapter
+import com.colosoft.recomiendame.ui.restaurants.RestaurantsFragmentDirections
+import com.colosoft.recomiendame.ui.restaurants.RestaurantsViewModel
 
 class SurpriseFragment : Fragment() {
 
-    private var _binding: FragmentSurpriseBinding? = null
-
-    // This property is only valid between onCreateView and
-    // onDestroyView.
-    private val binding get() = _binding!!
+    private lateinit var surpriseBinding: FragmentSurpriseBinding
+    private lateinit var surpriseViewModel: SurpriseViewModel
+    private var restaurantsList: ArrayList<Restaurant> = ArrayList()
+    private lateinit var surpriseRestaurantAdapter: SurpriseRestaurantAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val surpriseViewModel =
-            ViewModelProvider(this).get(SurpriseViewModel::class.java)
+        surpriseViewModel = ViewModelProvider(this)[SurpriseViewModel::class.java]
+        surpriseBinding = FragmentSurpriseBinding.inflate(inflater,container,false)
+        val root: View = surpriseBinding.root
 
-        _binding = FragmentSurpriseBinding.inflate(inflater, container, false)
-        val root: View = binding.root
-
-        val textView: TextView = binding.textNotifications
-        surpriseViewModel.text.observe(viewLifecycleOwner) {
-            textView.text = it
-        }
         return root
     }
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        println("Se creó el Fragment Surprise.")
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
+        super.onViewCreated(view, savedInstanceState)
+
+        surpriseRestaurantAdapter = SurpriseRestaurantAdapter(restaurantsList, onItemClicked = {onRestaurantItemClicked(it)})
+
+        surpriseBinding.surpriseRestaurantRecyclerView.apply {
+            layoutManager = LinearLayoutManager(this@SurpriseFragment.requireContext())
+            adapter = surpriseRestaurantAdapter
+            setHasFixedSize(false)
+        }
+
+        surpriseViewModel.restaurantLoaded.observe(viewLifecycleOwner){ result ->
+            println("En el fragment de Surprise: "+ result.size)
+            onRestaurantLoadedSubscribe(result)
+        }
+
+        surpriseViewModel.getSurpriseRestaurant()
+    }
+
+    private fun onRestaurantItemClicked(restaurant: Restaurant) {
+        findNavController().navigate(SurpriseFragmentDirections.actionNavigationSurpriseToNavigationDetails(restaurant))
+    }
+    private fun onRestaurantLoadedSubscribe(restaurantsList: ArrayList<Restaurant>?) {
+        restaurantsList?.let { restaurantsList ->
+            surpriseRestaurantAdapter.appendItems(restaurantsList)
+        }
     }
 }

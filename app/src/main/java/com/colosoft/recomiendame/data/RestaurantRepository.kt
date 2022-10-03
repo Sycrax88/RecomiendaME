@@ -35,4 +35,9 @@ class RestaurantRepository {
                 println("No funcionó.")
             } */
     }
+    suspend fun getSurpriseRestaurant(): QuerySnapshot {
+        db = FirebaseFirestore.getInstance()
+        return db.collection("restaurant").whereGreaterThanOrEqualTo("rating",3.5).get().await()
+
+    }
     }

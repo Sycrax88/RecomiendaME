@@ -14,8 +14,8 @@
 
         <ImageView
             android:id="@+id/poster_image_view"
-            android:layout_width="392dp"
-            android:layout_height="209dp"
+            android:layout_width="400dp"
+            android:layout_height="312dp"
             android:contentDescription="@null"
             android:scaleType="fitXY"
             app:layout_constraintEnd_toEndOf="parent"
@@ -31,7 +31,7 @@
             android:layout_marginTop="8dp"
             android:text="@string/restaurant_title"
             android:textColor="@color/primary_dark"
-            android:textSize="20sp"
+            android:textSize="24sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -45,6 +45,7 @@
             android:layout_marginStart="2dp"
             android:layout_marginTop="10dp"
             android:text="@string/location_example"
+            android:textStyle="bold"
             app:layout_constraintStart_toEndOf="@+id/imageView5"
             app:layout_constraintTop_toBottomOf="@+id/restaurant_name_text_view" />
 

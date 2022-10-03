@@ -21,8 +21,10 @@
         <entry key="..\:/Users/sebastian/StudioProjects/RecomiendaME/app/src/main/res/layout/fragment_details.xml" value="0.5" />
         <entry key="..\:/Users/sebastian/StudioProjects/RecomiendaME/app/src/main/res/layout/fragment_login.xml" value="0.1" />
         <entry key="..\:/Users/sebastian/StudioProjects/RecomiendaME/app/src/main/res/layout/fragment_restaurants.xml" value="0.20786516853932585" />
+        <entry key="..\:/Users/sebastian/StudioProjects/RecomiendaME/app/src/main/res/layout/fragment_write_opinion.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/sebastian/StudioProjects/RecomiendaME/app/src/main/res/layout/opinion_item.xml" value="0.33" />
         <entry key="..\:/Users/sebastian/StudioProjects/RecomiendaME/app/src/main/res/layout/restaurant_item.xml" value="0.464354527938343" />
+        <entry key="..\:/Users/sebastian/StudioProjects/RecomiendaME/app/src/main/res/menu/bottom_nav_menu.xml" value="0.1" />
       </map>
     </option>
   </component>

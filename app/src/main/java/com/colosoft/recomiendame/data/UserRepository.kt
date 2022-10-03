@@ -6,7 +6,9 @@ import com.google.firebase.FirebaseNetworkException
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseAuthException
 import com.google.firebase.auth.ktx.auth
+import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.FirebaseFirestoreException
+import com.google.firebase.firestore.QuerySnapshot
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import kotlinx.coroutines.tasks.await
@@ -15,6 +17,11 @@ class UserRepository {
 
     private var auth: FirebaseAuth = Firebase.auth
     private var db = Firebase.firestore
+
+    suspend fun getUser(uid: String): QuerySnapshot {
+        db = FirebaseFirestore.getInstance()
+        return db.collection("users").whereEqualTo("uid",uid).get().await()
+    }
 
     suspend fun registerUser(email: String, password: String): ResourceRemote<String?> {
         return try {

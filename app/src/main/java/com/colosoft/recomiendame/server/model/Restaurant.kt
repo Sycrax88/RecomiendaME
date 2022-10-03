@@ -8,5 +8,6 @@ data class Restaurant(
     var restaurantLocation: String? = null,
     var rating: Double? = null,
     var urlMenu: String? = null,
-    var urlPhoto: String? = null
+    var urlPhoto: String? = null,
+    var urlMap: String? = null
 ):Serializable

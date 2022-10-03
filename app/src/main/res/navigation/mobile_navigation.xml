@@ -29,6 +29,22 @@
     <argument
         android:name="restaurant"
         app:argType="com.colosoft.recomiendame.server.model.Restaurant" />
+        <action
+            android:id="@+id/action_navigation_details_to_navigation_write_opinion"
+            app:destination="@id/navigation_write_opinion" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/navigation_write_opinion"
+        android:name="com.colosoft.recomiendame.ui.writeopinion.WriteOpinionFragment"
+        android:label="@string/write_opinion_title"
+        tools:layout="@layout/fragment_write_opinion" >
+        <argument
+            android:name="restaurant"
+            app:argType="com.colosoft.recomiendame.server.model.Restaurant" />
+        <action
+            android:id="@+id/action_navigation_write_opinion_to_navigation_restaurants"
+            app:destination="@id/navigation_restaurants" />
     </fragment>
 
     <fragment

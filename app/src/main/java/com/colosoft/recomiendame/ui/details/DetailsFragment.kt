@@ -1,20 +1,21 @@
 package com.colosoft.recomiendame.ui.details
 
-import androidx.lifecycle.ViewModelProvider
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.colosoft.recomiendame.R
 import com.colosoft.recomiendame.databinding.FragmentDetailsBinding
 import com.colosoft.recomiendame.server.model.Opinion
-import com.colosoft.recomiendame.server.model.Restaurant
-import com.colosoft.recomiendame.ui.restaurants.RestaurantsAdapter
 import com.squareup.picasso.Picasso
+
 
 class DetailsFragment : Fragment() {
 
@@ -105,12 +106,26 @@ class DetailsFragment : Fragment() {
 
 
         with(detailsBinding){
+            menuImageView.setOnClickListener {
+                val i = Intent(Intent.ACTION_VIEW)
+                i.data = Uri.parse(restaurant.urlMenu)
+                startActivity(i)
+            }
+            locationTextView.setOnClickListener {
+                val i = Intent(Intent.ACTION_VIEW)
+                i.data = Uri.parse(restaurant.urlMap)
+                startActivity(i)
+            }
+
             restaurantNameTextView.text = restaurant.name
             locationTextView.text = restaurant.restaurantLocation
             ratingTextView.text = restaurant.rating.toString()
             if (restaurant.urlPhoto != null)
                 Picasso.get().load(restaurant.urlPhoto).into(posterImageView)
 
+            createOpinionButton.setOnClickListener {
+                findNavController().navigate(DetailsFragmentDirections.actionNavigationDetailsToNavigationWriteOpinion(restaurant))
+            }
         }
     }
     private fun onOpinionsLoadedSubscribe(opinionsList: ArrayList<Opinion>?) {

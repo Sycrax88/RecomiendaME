@@ -71,16 +71,19 @@ class WriteOpinionViewModel : ViewModel() {
 
             }
             val totalOpinions= opinionsList.size
+            println("Cantidad de opiniones: $totalOpinions")
 
                 var ratingSummatory = 0.0
                 for (item in opinionsList){
                     ratingSummatory += item.rating!!
                 }
+            println("Sumatoria de opiniones: $ratingSummatory")
                 val ratingMean = ratingSummatory/totalOpinions
                 println("Nuevo promedio: $ratingMean")
 
                 val ratingMeanMap = hashMapOf(
-                    "rating" to ratingMean
+                    "rating" to ratingMean,
+                    "numRating" to totalOpinions+1
                 )
                 db.collection("restaurant")
                     .document(restaurantId).update(ratingMeanMap as Map<String, Any>)

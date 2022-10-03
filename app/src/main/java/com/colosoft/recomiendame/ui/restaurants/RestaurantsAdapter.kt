@@ -43,6 +43,7 @@ class RestaurantsAdapter (
                 restaurantNameTextView.text = restaurant.name
                 locationTextView.text = restaurant.restaurantLocation
                 ratingLabelTextView.text = restaurant.rating.toString()
+                numRatingLabelTextView.text = restaurant.numRating.toString()
                 if (restaurant.urlPhoto != null)
                     Picasso.get().load(restaurant.urlPhoto).into(posterImageView)
             }

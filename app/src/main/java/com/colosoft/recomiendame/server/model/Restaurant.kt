@@ -7,6 +7,7 @@ data class Restaurant(
     var name: String? = null,
     var restaurantLocation: String? = null,
     var rating: Double? = null,
+    var numRating: Int? = null,
     var urlMenu: String? = null,
     var urlPhoto: String? = null,
     var urlMap: String? = null

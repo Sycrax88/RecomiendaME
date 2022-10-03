@@ -41,6 +41,7 @@
         android:layout_marginStart="3dp"
         android:layout_marginTop="10dp"
         android:fontFamily="sans-serif-black"
+        android:maxLength="4"
         android:text="@string/rating_label"
         android:textColor="@color/black"
         android:textStyle="bold"

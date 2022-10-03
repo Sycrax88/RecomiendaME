@@ -23,11 +23,6 @@ class WriteOpinionViewModel : ViewModel() {
     private var db = Firebase.firestore
     private var auth: FirebaseAuth = Firebase.auth
     private val opinionRepository = OpinionRepository()
-    private val userRepository = UserRepository()
-    private lateinit var opinion: Opinion
-    var userList: ArrayList<User> = ArrayList()
-
-
 
 
     fun createOpinion(restaurant: Restaurant, rateByUser: Double, message: String) {
@@ -58,6 +53,46 @@ class WriteOpinionViewModel : ViewModel() {
                 "user_name" to actualUser?.name
             )
             db.collection("opinions").add(opinionLocal)
+        }
+    }
+
+    fun updateRestaurantRating(restaurant: Restaurant){
+        val restaurantId = restaurant.id.toString()
+        val opinionsList: ArrayList<Opinion> = ArrayList()
+
+        viewModelScope.launch {
+            val querySnapshot = opinionRepository.getOpinions(restaurantId)
+            if(opinionsList.size == 0) {
+                for (document in querySnapshot) {
+                    val opinion: Opinion = document.toObject<Opinion>()
+                    opinionsList.add(opinion)
+                }
+
+            }
+            val totalOpinions= opinionsList.size
+            if(opinionsList.size != 0){
+                var ratingSummatory = 0.0
+                for (item in opinionsList){
+                    ratingSummatory += item.rating!!
+                }
+                val ratingMean = ratingSummatory/totalOpinions
+                println("Nuevo promedio: $ratingMean")
+
+                val ratingMeanMap = hashMapOf(
+                    "rating" to ratingMean
+                )
+                db.collection("restaurant")
+                    .document(restaurantId).update(ratingMeanMap as Map<String, Any>)
+            }else{
+                val ratingMean = 0.0
+                println("Nuevo promedio: $ratingMean")
+
+                val ratingMeanMap = hashMapOf(
+                    "rating" to ratingMean
+                )
+                db.collection("restaurant")
+                    .document(restaurantId).update(ratingMeanMap as Map<String, Any>)
+            }
         }
     }
     }

@@ -91,10 +91,16 @@ class WriteOpinionFragment : Fragment() {
             buttonWriteOpinion.setOnClickListener {
                 if (restaurantRateByUser > 0.0){
                     if (opinionInputEditText.text.toString().isNotEmpty()){
-                        writeOpinionViewModel.createOpinion(restaurant,restaurantRateByUser,opinionInputEditText.text.toString())
-                        Toast.makeText(getActivity(),R.string.successOpinion,Toast.LENGTH_SHORT).show();
-                        findNavController().navigate(WriteOpinionFragmentDirections.actionNavigationWriteOpinionToNavigationRestaurants())
+                        if(opinionInputEditText.length()>= 6){
+                            writeOpinionViewModel.createOpinion(restaurant,restaurantRateByUser,opinionInputEditText.text.toString())
+                            writeOpinionViewModel.updateRestaurantRating(restaurant)
+                            Toast.makeText(getActivity(),R.string.successOpinion,Toast.LENGTH_SHORT).show();
+                            findNavController().navigate(WriteOpinionFragmentDirections.actionNavigationWriteOpinionToNavigationRestaurants())
+                        }
+                        else{
+                            Toast.makeText(getActivity(),R.string.moreThan6Chars,Toast.LENGTH_SHORT).show();
 
+                        }
                     }
                     else{
                         Toast.makeText(getActivity(),R.string.emptyOpinion,Toast.LENGTH_SHORT).show();

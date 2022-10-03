@@ -16,10 +16,10 @@ class RestaurantsViewModel : ViewModel() {
 
     private val _restaurantsLoaded : MutableLiveData<ArrayList<Restaurant>> = MutableLiveData()
     val restaurantsLoaded: LiveData<ArrayList<Restaurant>> = _restaurantsLoaded
-    var restaurantsList: ArrayList<Restaurant> = ArrayList()
 
     fun getRestaurants() {
         viewModelScope.launch {
+            val restaurantsList: ArrayList<Restaurant> = ArrayList()
             val querySnapshot = restaurantRepository.getRestaurants()
             println("En el repositorio antes del IF : "+ restaurantsList.size)
             if(restaurantsList.size == 0) {

@@ -47,6 +47,7 @@ class WriteOpinionViewModel : ViewModel() {
             val opinionLocal = hashMapOf(
                 "rating" to rateByUser,
                 "restaurant_id" to restaurant.id,
+                "restaurant_name" to restaurant.name,
                 "text" to message,
                 "user_id" to auth.currentUser?.uid.toString(),
                 "user_last_name" to actualUser?.lastName,
@@ -70,7 +71,7 @@ class WriteOpinionViewModel : ViewModel() {
 
             }
             val totalOpinions= opinionsList.size
-            if(opinionsList.size != 0){
+
                 var ratingSummatory = 0.0
                 for (item in opinionsList){
                     ratingSummatory += item.rating!!
@@ -83,16 +84,7 @@ class WriteOpinionViewModel : ViewModel() {
                 )
                 db.collection("restaurant")
                     .document(restaurantId).update(ratingMeanMap as Map<String, Any>)
-            }else{
-                val ratingMean = 0.0
-                println("Nuevo promedio: $ratingMean")
 
-                val ratingMeanMap = hashMapOf(
-                    "rating" to ratingMean
-                )
-                db.collection("restaurant")
-                    .document(restaurantId).update(ratingMeanMap as Map<String, Any>)
-            }
         }
     }
     }

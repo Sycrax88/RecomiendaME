@@ -25,6 +25,10 @@ class OpinionRepository {
         db = FirebaseFirestore.getInstance()
         return db.collection("opinions").whereEqualTo("restaurant_id",resturantId).get().await()
     }
+    suspend fun getAllOpinions(): QuerySnapshot {
+        db = FirebaseFirestore.getInstance()
+        return db.collection("opinions").get().await()
+    }
 
      suspend fun createOpinion(opinion: Opinion): ResourceRemote<String?>{
          return try {

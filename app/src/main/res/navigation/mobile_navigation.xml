@@ -31,8 +31,8 @@
         android:label="@string/details"
         tools:layout="@layout/fragment_details" >
     <argument
-        android:name="restaurant"
-        app:argType="com.colosoft.recomiendame.server.model.Restaurant" />
+        android:name="mensaje"
+        app:argType="com.colosoft.recomiendame.server.model.Mensaje" />
         <action
             android:id="@+id/action_navigation_details_to_navigation_write_opinion"
             app:destination="@id/navigation_write_opinion" />

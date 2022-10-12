@@ -34,7 +34,7 @@ class RestaurantsFragment : Fragment() {
 
         super.onViewCreated(view, savedInstanceState)
 
-        restaurantsAdapter = RestaurantsAdapter(restaurantsList, onItemClicked = {onRestaurantItemClicked(it)})
+      //  restaurantsAdapter = RestaurantsAdapter(restaurantsList, onItemClicked = {onRestaurantItemClicked(it)})
 
         restaurantBinding.restaurantRecyclerView.apply {
             layoutManager = LinearLayoutManager(this@RestaurantsFragment.requireContext())
@@ -50,9 +50,9 @@ class RestaurantsFragment : Fragment() {
         restaurantsViewModel.getRestaurants()
     }
 
-   private fun onRestaurantItemClicked(restaurant: Restaurant) {
+  /* private fun onRestaurantItemClicked(restaurant: Restaurant) {
         findNavController().navigate(RestaurantsFragmentDirections.actionNavigationRestaurantsToNavigationDetails(restaurant))
-    }
+    }*/
     private fun onRestaurantsLoadedSubscribe(restaurantsList: ArrayList<Restaurant>?) {
         restaurantsList?.let { restaurantsList ->
             restaurantsAdapter.appendItems(restaurantsList)

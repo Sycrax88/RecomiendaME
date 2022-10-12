@@ -39,7 +39,7 @@ class SurpriseFragment : Fragment() {
 
         super.onViewCreated(view, savedInstanceState)
 
-        surpriseRestaurantAdapter = SurpriseRestaurantAdapter(restaurantsList, onItemClicked = {onRestaurantItemClicked(it)})
+       // surpriseRestaurantAdapter = SurpriseRestaurantAdapter(restaurantsList, onItemClicked = {onRestaurantItemClicked(it)})
 
         surpriseBinding.surpriseRestaurantRecyclerView.apply {
             layoutManager = LinearLayoutManager(this@SurpriseFragment.requireContext())
@@ -55,9 +55,9 @@ class SurpriseFragment : Fragment() {
         surpriseViewModel.getSurpriseRestaurant()
     }
 
-    private fun onRestaurantItemClicked(restaurant: Restaurant) {
+    /*private fun onRestaurantItemClicked(restaurant: Restaurant) {
         findNavController().navigate(SurpriseFragmentDirections.actionNavigationSurpriseToNavigationDetails(restaurant))
-    }
+    }*/
     private fun onRestaurantLoadedSubscribe(restaurantsList: ArrayList<Restaurant>?) {
         restaurantsList?.let { restaurantsList ->
             surpriseRestaurantAdapter.appendItems(restaurantsList)

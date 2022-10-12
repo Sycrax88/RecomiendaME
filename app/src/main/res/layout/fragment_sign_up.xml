@@ -158,10 +158,11 @@
             android:layout_height="130dp"
             android:layout_marginTop="130dp"
             android:contentDescription="@string/app_name"
-            android:src="@drawable/logo"
+            android:src="@drawable/logo_cesar"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:tint="@color/primary_dark" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">RecomiendaME</string>
+    <string name="app_name">Cifrado Cesar</string>
     <string name="home">Principal</string>
     <string name="restaurants">Restaurantes</string>
     <string name="details">Detalles</string>
@@ -40,4 +40,10 @@
     <string name="moreThan6Chars">Escribe más de 6 caracteres</string>
     <string name="home_title">Opiniones</string>
     <string name="surprise_title">Nuestra Recomendación</string>
+    <string name="code_message_title">Mensaje Codificado</string>
+    <string name="key_title">Inserte la clave</string>
+    <string name="key_error">Inserte la clave.</string>
+    <string name="message_title">Mensaje</string>
+    <string name="decode">Decodificar</string>
+    <string name="messages_home_title">Mensajes</string>
 </resources>

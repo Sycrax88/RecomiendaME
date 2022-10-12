@@ -10,7 +10,7 @@ import com.google.firebase.firestore.ktx.toObject
 import kotlinx.coroutines.launch
 
 class DetailsViewModel : ViewModel() {
-    private val opinionRepository = OpinionRepository()
+    /*private val opinionRepository = OpinionRepository()
 
     private val _opinionsLoaded : MutableLiveData<ArrayList<Opinion>> = MutableLiveData()
     val opinionsLoaded: LiveData<ArrayList<Opinion>> = _opinionsLoaded
@@ -30,5 +30,5 @@ class DetailsViewModel : ViewModel() {
 
             _opinionsLoaded.postValue(opinionsList)
         }
-    }
+    } */
 }

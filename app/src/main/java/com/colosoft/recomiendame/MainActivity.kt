@@ -31,8 +31,8 @@ class MainActivity : AppCompatActivity() {
         navController.addOnDestinationChangedListener{_,destination, _ ->
             if (destination.id == R.id.navigation_login || destination.id == R.id.navigation_signup)
                 navView.visibility = View.GONE
-            else
-                navView.visibility = View.VISIBLE
+            //else
+               // navView.visibility = View.VISIBLE
 
         }
         // Passing each menu ID as a set of Ids because each

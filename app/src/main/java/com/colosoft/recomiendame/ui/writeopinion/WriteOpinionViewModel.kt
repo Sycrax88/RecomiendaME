@@ -47,10 +47,10 @@ class WriteOpinionViewModel : ViewModel() {
     }
 
     private fun codeMessage(message: String, key: Int): String{
-        val alphabetListLowerCase = listOf("a", "b", "c","d","e","f","g","h","i","j","k","l","m","n","ñ","o","p","q","r","s","t","u"
-            ,"v","w","x","y","z")
-        val alphabetListCapitalLetter = listOf("A", "B", "C","D","E","F","G","H","I","J","K","L","M","N","Ñ","O","P","Q","R","S","T","U"
-            ,"V","W","X","Y","Z")
+        val alphabetListLowerCase = listOf("a", "b", "c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u"
+            ,"v","w","x","y","z"," ")
+        val alphabetListCapitalLetter = listOf("A", "B", "C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U"
+            ,"V","W","X","Y","Z"," ")
         println("Tamaño alfabeto: " + alphabetListLowerCase.size)
 
         var finalMessage = ""

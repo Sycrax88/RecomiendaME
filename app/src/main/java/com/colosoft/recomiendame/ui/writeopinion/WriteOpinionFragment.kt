@@ -21,7 +21,6 @@ class WriteOpinionFragment : Fragment() {
 
     private lateinit var  writeOpinionViewModel: WriteOpinionViewModel
     private lateinit var writeOpinionBinding: FragmentWriteOpinionBinding
-    private val args: WriteOpinionFragmentArgs by navArgs()
     private lateinit var opinion: Opinion
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -37,75 +36,24 @@ class WriteOpinionFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val restaurant = args.restaurant
-
-        var restaurantRateByUser = 0.0
 
         with(writeOpinionBinding){
-            star1ImageViewOpinion.setOnClickListener {
-                star1ImageViewOpinion.setImageDrawable(resources.getDrawable(R.drawable.ic_star_rate))
-                star2ImageViewOpinion.setImageDrawable(resources.getDrawable(R.drawable.ic_star_rate_empty))
-                star3ImageViewOpinion.setImageDrawable(resources.getDrawable(R.drawable.ic_star_rate_empty))
-                star4ImageViewOpinion.setImageDrawable(resources.getDrawable(R.drawable.ic_star_rate_empty))
-                star5ImageViewOpinion.setImageDrawable(resources.getDrawable(R.drawable.ic_star_rate_empty))
-                restaurantRateByUser = 1.0
-            }
-            star2ImageViewOpinion.setOnClickListener {
-                star1ImageViewOpinion.setImageDrawable(resources.getDrawable(R.drawable.ic_star_rate))
-                star2ImageViewOpinion.setImageDrawable(resources.getDrawable(R.drawable.ic_star_rate))
-                star3ImageViewOpinion.setImageDrawable(resources.getDrawable(R.drawable.ic_star_rate_empty))
-                star4ImageViewOpinion.setImageDrawable(resources.getDrawable(R.drawable.ic_star_rate_empty))
-                star5ImageViewOpinion.setImageDrawable(resources.getDrawable(R.drawable.ic_star_rate_empty))
-                restaurantRateByUser = 2.0
-
-            }
-            star3ImageViewOpinion.setOnClickListener {
-                star1ImageViewOpinion.setImageDrawable(resources.getDrawable(R.drawable.ic_star_rate))
-                star2ImageViewOpinion.setImageDrawable(resources.getDrawable(R.drawable.ic_star_rate))
-                star3ImageViewOpinion.setImageDrawable(resources.getDrawable(R.drawable.ic_star_rate))
-                star4ImageViewOpinion.setImageDrawable(resources.getDrawable(R.drawable.ic_star_rate_empty))
-                star5ImageViewOpinion.setImageDrawable(resources.getDrawable(R.drawable.ic_star_rate_empty))
-                restaurantRateByUser = 3.0
-            }
-            star4ImageViewOpinion.setOnClickListener {
-                star1ImageViewOpinion.setImageDrawable(resources.getDrawable(R.drawable.ic_star_rate))
-                star2ImageViewOpinion.setImageDrawable(resources.getDrawable(R.drawable.ic_star_rate))
-                star3ImageViewOpinion.setImageDrawable(resources.getDrawable(R.drawable.ic_star_rate))
-                star4ImageViewOpinion.setImageDrawable(resources.getDrawable(R.drawable.ic_star_rate))
-                star5ImageViewOpinion.setImageDrawable(resources.getDrawable(R.drawable.ic_star_rate_empty))
-                restaurantRateByUser = 4.0
-
-            }
-            star5ImageViewOpinion.setOnClickListener {
-                star1ImageViewOpinion.setImageDrawable(resources.getDrawable(R.drawable.ic_star_rate))
-                star2ImageViewOpinion.setImageDrawable(resources.getDrawable(R.drawable.ic_star_rate))
-                star3ImageViewOpinion.setImageDrawable(resources.getDrawable(R.drawable.ic_star_rate))
-                star4ImageViewOpinion.setImageDrawable(resources.getDrawable(R.drawable.ic_star_rate))
-                star5ImageViewOpinion.setImageDrawable(resources.getDrawable(R.drawable.ic_star_rate))
-                restaurantRateByUser = 5.0
-            }
-
-
-
 
             buttonWriteOpinion.setOnClickListener {
-                if (restaurantRateByUser > 0.0){
-                    if (opinionInputEditText.text.toString().isNotEmpty()){
-                        if(opinionInputEditText.length()>= 6){
-                            writeOpinionViewModel.createOpinion(restaurant,restaurantRateByUser,opinionInputEditText.text.toString())
-                            writeOpinionViewModel.updateRestaurantRating(restaurant,restaurantRateByUser)
+                if (keyInputEditText.text.toString().isNotEmpty()) {
+                    if (keyInputEditText.text.toString().toInt() > 0){
+                        if (opinionInputEditText.text.toString().isNotEmpty()){
+                            writeOpinionViewModel.createMessage(opinionInputEditText.text.toString(),keyInputEditText.text.toString().toInt())
                             Toast.makeText(getActivity(),R.string.successOpinion,Toast.LENGTH_SHORT).show();
-                            findNavController().navigate(WriteOpinionFragmentDirections.actionNavigationWriteOpinionToNavigationRestaurants())
+                            findNavController().navigate(WriteOpinionFragmentDirections.actionNavigationWriteOpinionToNavigationHome())
                         }
                         else{
-                            Toast.makeText(getActivity(),R.string.moreThan6Chars,Toast.LENGTH_SHORT).show();
-
+                            Toast.makeText(getActivity(),R.string.emptyOpinion,Toast.LENGTH_SHORT).show();
                         }
                     }
                     else{
-                        Toast.makeText(getActivity(),R.string.emptyOpinion,Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getActivity(),R.string.positiveKey,Toast.LENGTH_SHORT).show();
                     }
-
                 }
                 else{
                     Toast.makeText(getActivity(),R.string.emptyStars,Toast.LENGTH_SHORT).show();

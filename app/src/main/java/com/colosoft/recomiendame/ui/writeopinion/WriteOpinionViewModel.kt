@@ -25,39 +25,58 @@ class WriteOpinionViewModel : ViewModel() {
     private val opinionRepository = OpinionRepository()
 
 
-    fun createOpinion(restaurant: Restaurant, rateByUser: Double, message: String) {
+    fun createMessage(message: String, keyByUser: Int) {
        // viewModelScope.launch {
             db = FirebaseFirestore.getInstance()
             val uid = auth.currentUser?.uid.toString()
             println("Current uid del ViewModel del opinion: $uid")
-            /*val querySnapshot = userRepository.getUser(uid)
-            if (userList.size == 0) {
-                for (document in querySnapshot) {
-                    val user: User = document.toObject<User>()
-                    userList.add(user)
-                }
-            }
-            val actualUser = userList[0]
-            println("Actual user en print: $actualUser")
-*/
 
             db.collection("users").document(uid).get().addOnSuccessListener { documentSnapshot ->
             val actualUser = documentSnapshot.toObject<User>()
             println("Actual user en print: $actualUser")
+            val codedMessage = codeMessage(message,keyByUser)
             val opinionLocal = hashMapOf(
-                "rating" to rateByUser,
-                "restaurant_id" to restaurant.id,
-                "restaurant_name" to restaurant.name,
-                "text" to message,
+                "clave" to keyByUser,
+                "mensaje_cifrado" to codedMessage,
                 "user_id" to auth.currentUser?.uid.toString(),
                 "user_last_name" to actualUser?.lastName,
                 "user_name" to actualUser?.name
             )
-            db.collection("opinions").add(opinionLocal)
+            db.collection("mensajes").add(opinionLocal)
         }
     }
 
-    fun updateRestaurantRating(restaurant: Restaurant, rateByUser: Double){
+    private fun codeMessage(message: String, key: Int): String{
+        val alphabetListLowerCase = listOf("a", "b", "c","d","e","f","g","h","i","j","k","l","m","n","ñ","o","p","q","r","s","t","u"
+            ,"v","w","x","y","z")
+        val alphabetListCapitalLetter = listOf("A", "B", "C","D","E","F","G","H","I","J","K","L","M","N","Ñ","O","P","Q","R","S","T","U"
+            ,"V","W","X","Y","Z")
+        println("Tamaño alfabeto: " + alphabetListLowerCase.size)
+
+        var finalMessage = ""
+        //PARA CIFRAR
+        for (c in message){
+            var isCapitalLetter = false
+            var indexAlphabet = alphabetListLowerCase.indexOf(c.toString())
+            if (indexAlphabet == null || indexAlphabet == -1){
+                indexAlphabet = alphabetListCapitalLetter.indexOf(c.toString())
+                isCapitalLetter = true
+            }
+            println("Caracter: $c")
+            val newCharIndex = indexAlphabet + (key%27)
+            println("Índice caracter: $indexAlphabet")
+            println("Índice del nuevo caracter: $newCharIndex")
+            if (isCapitalLetter){
+                finalMessage += alphabetListCapitalLetter[newCharIndex]
+            }else{
+                finalMessage += alphabetListLowerCase[newCharIndex]
+            }
+            println("Mensaje: $finalMessage")
+        }
+        return finalMessage
+    }
+
+  /*  fun updateRestaurantRating(restaurant: Restaurant, rateByUser: Double){
         val restaurantId = restaurant.id.toString()
         val opinionsList: ArrayList<Opinion> = ArrayList()
 
@@ -90,5 +109,5 @@ class WriteOpinionViewModel : ViewModel() {
                     .document(restaurantId).update(ratingMeanMap as Map<String, Any>)
 
         }
-    }
+    }*/
     }

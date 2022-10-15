@@ -52,6 +52,19 @@ class HomeFragment : Fragment() {
         }
 
         homeViewModel.getMensajes()
+
+        homeBinding.refreshButton.setOnClickListener{
+            homeViewModel.mensajesLoaded.observe(viewLifecycleOwner) { result ->
+                println("En el fragment de Home: " + result.size)
+                onMensajesLoadedSubscribe(result)
+            }
+
+            homeViewModel.getMensajes()
+        }
+
+        homeBinding.createMessageButton.setOnClickListener {
+            findNavController().navigate(HomeFragmentDirections.actionNavigationHomeToNavigationWriteOpinion())
+        }
     }
     private fun onMensajeItemClicked(mensaje: Mensaje) {
         findNavController().navigate(HomeFragmentDirections.actionNavigationHomeToNavigationDetails(mensaje))
@@ -61,6 +74,8 @@ class HomeFragment : Fragment() {
             mensajesHomeAdapter.appendItems(mensajesList)
         }
     }
+
+
     override fun onResume() {
         super.onResume()
         (activity as AppCompatActivity).supportActionBar!!.hide()

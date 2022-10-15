@@ -31,11 +31,11 @@
     <string name="menu_label">Menú</string>
     <string name="opinions">Opiniones</string>
     <string name="create_opinion">Comenta tu experiencia</string>
-    <string name="write_opinion_title">Cuéntanos tu experiencia</string>
+    <string name="write_opinion_title">Escribe tu Mensaje</string>
     <string name="publicate">Publicar</string>
-    <string name="emptyOpinion">Escribe una opinión</string>
-    <string name="emptyStars">Elije una calificación</string>
-    <string name="successOpinion">Su opinión ha sido publicada</string>
+    <string name="emptyOpinion">Escribe un mensaje</string>
+    <string name="emptyStars">Ingrese una clave válida</string>
+    <string name="successOpinion">Su mensaje ha sido publicado</string>
     <string name="write_here">¡Escribe aquí!</string>
     <string name="moreThan6Chars">Escribe más de 6 caracteres</string>
     <string name="home_title">Opiniones</string>
@@ -46,4 +46,7 @@
     <string name="message_title">Mensaje</string>
     <string name="decode">Decodificar</string>
     <string name="messages_home_title">Mensajes</string>
+    <string name="create_message">Escribir Mensaje</string>
+    <string name="write_key">Pon tu clave</string>
+    <string name="positiveKey">Ingrese una clave positiva</string>
 </resources>

@@ -63,7 +63,10 @@ class WriteOpinionViewModel : ViewModel() {
                 isCapitalLetter = true
             }
             println("Caracter: $c")
-            val newCharIndex = indexAlphabet + (key%27)
+            var newCharIndex = indexAlphabet + (key%27)
+            if(newCharIndex > 26){
+                newCharIndex -= 27
+            }
             println("Índice caracter: $indexAlphabet")
             println("Índice del nuevo caracter: $newCharIndex")
             if (isCapitalLetter){
